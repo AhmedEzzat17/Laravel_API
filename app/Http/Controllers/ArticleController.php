@@ -8,10 +8,10 @@ use App\Models\Article;
 
 class ArticleController extends Controller
 {
-    public function createArticle(){
+    public function createArticle(Request $request){
         $articles = Article::create([
-            'title' => 'Random Article',
-            'content' => 'Random Article Content',
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
         ]);
         return $articles;
     }
@@ -20,19 +20,19 @@ class ArticleController extends Controller
         $articles = Article::all();
         return $articles;
     }
-    
+
 
     public function getArticle($id){
         $article = Article::find($id);
         return $article;
     }
-    
+
     public function deleteArticle($id){
         $article = Article::find($id);
         $article->delete();
         return $article;
     }
-    
+
     public function updateArticle($id, Request $request){
         $article = Article::find($id);
         $article->title = $request->input('title');
